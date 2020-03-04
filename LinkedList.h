@@ -6,15 +6,15 @@ enum boolean {
 };
 
 typedef enum boolean bool;
-
+//Estrutura do Nó, contendo o dado e o endereço do proximo ponteiro
 typedef struct Node {
-    void *data;
-    struct Node *next;
+    void *data; //guardar o dado
+    struct Node *next; //endereço do proximo ponteiro
 }Node;
 
 typedef struct LinkedList {
-    Node *first;
-    int size;
+    Node *first;  //endereço do primeiro ponteiro
+    int size;     //guarda o tamanho
 }LinkedList;
 
 typedef bool (*compare)(void*,void*);
