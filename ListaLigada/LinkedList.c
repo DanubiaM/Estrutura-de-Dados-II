@@ -32,4 +32,43 @@ int enqueue(LinkedList *list, void *data){
 
 list->size++;
 }
-void* first(LinkedList *list);
+void* first(LinkedList *list){
+	Node *aux;
+	if(isEmpty(list)){
+		return 0;
+	}else{
+		*aux=list->fist;
+		return aux->data;
+	}
+}
+//vai retornar o ultimo valor da lista
+//primeiro ira verificar se a lista  lista esta vazia, se nao estiver ira procurar o valor final que tiver NULL
+//quando achar ira retornar o  date deste no
+void* last(LinkedList *list){
+
+	if(isEmpty(list)){
+		return 0;
+	}else{
+		Node *aux= list->first;
+		while(aux->next !=NULL){
+			aux= aux->next;
+		}
+		return aux->date;
+	}
+}
+//ira inserir o valor no inicio da lista
+//cria o novo no, recebe o valor, se a lista for vazia, list->first ira receber o novo no
+//se nao for vazia, o novo nó ira apontar para first, first ira apontar agr para o endereço do primeiro no
+//ira adicionar mais um ao tamanho
+int push(LinkedList *list, void *data){
+	Node *NewNode;
+	NewNode->data= data;
+
+	if(isEmpty(list)){
+		return list->first = NewNode;
+	}
+	NewNode->next = list->first;
+	list->first = NewNode;
+	list->size++;
+}
+
