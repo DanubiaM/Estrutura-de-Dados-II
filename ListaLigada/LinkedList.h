@@ -49,6 +49,7 @@ int push(LinkedList *list, void *data);//insere no inicio da fila
 void* pop(LinkedList *list);//msm da dequeue, porem usa a função dependendo se esta trabalhando com pilha ou fila
 
 void* top(LinkedList *list);//o primeiro é frist
+
 bool isEmpty(LinkedList *list);
 
 int indexOf(LinkedList *list, void *data, compare equal);//devolver a posição do dado solicitado
