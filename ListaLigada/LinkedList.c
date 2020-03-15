@@ -35,9 +35,9 @@ list->size++;
 void* first(LinkedList *list){
 	Node *aux;
 	if(isEmpty(list)){
-		return 0;
+		return NULL;
 	}else{
-		*aux=list->fist;
+		*aux=list->first; //verificar se ta funcionando ,diferente do prof
 		return aux->data;
 	}
 }
@@ -45,24 +45,24 @@ void* first(LinkedList *list){
 //primeiro ira verificar se a lista  lista esta vazia, se nao estiver ira procurar o valor final que tiver NULL
 //quando achar ira retornar o  date deste no
 void* last(LinkedList *list){
-
-	if(isEmpty(list)){
-		return 0;
-	}else{
+	void *data=NULL;
+	if(!isEmpty(list)){
 		Node *aux= list->first;
 		while(aux->next !=NULL){
 			aux= aux->next;
 		}
-		return aux->date;
+		data = aux->data;
 	}
+	return data;
 }
 //ira inserir o valor no inicio da lista
 //cria o novo no, recebe o valor, se a lista for vazia, list->first ira receber o novo no
 //se nao for vazia, o novo nó ira apontar para first, first ira apontar agr para o endereço do primeiro no
 //ira adicionar mais um ao tamanho
 int push(LinkedList *list, void *data){
-	Node *NewNode;
+	Node *NewNode = (Node*)malloc(sizeof(Node));
 	NewNode->data= data;
+	if(NewuNode=NULL) return -1;
 
 	if(isEmpty(list)){
 		return list->first = NewNode;
@@ -70,5 +70,58 @@ int push(LinkedList *list, void *data){
 	NewNode->next = list->first;
 	list->first = NewNode;
 	list->size++;
+	return 1;
 }
+//remove o primeiro valor da lista
+//se a lista for vazia retorna null, caso n, um no aux recebe o endereço do primeiro no
+//o endereço do primeiro no vai receber o endereço da onde o no aux esta apontando
+//data recebe o dado do no aux
+//libera o no aux, pois ele é o elemento a ser removido
+//diminui um na lista
+void* dequeue(LinkedList *list){
+	Node *aux;
+	if(isEmpty(list)){
+		return NULL;
+	}
+	aux = list->first;
+	list->first = aux->next; //temos aqui uma diferença da do prof. ver se funcioa
+	void *data = aux->data;
+	free(aux);
+	list->size--;
+	return data;
+}
+//funciona da mesma maneira que o pop
+void* pop(LinkedList *list){
+	return dequeue(list);
+}
+//mostra o topo da lista, logo utiliza a funcao first
+void* top(LinkedList *list){
+	return first(list);
+}
+//funcao responsavel por retornar a posicao onde esta o valor dado pelo usuario
+//primeiro verifica se a lista esta vazia, se estiver retorna -1
+//cria um aux que recebe o  endereco do primeiro no da lista
+//o laco ira procurar a posicao do valor dito pelo usuario enquando aux ->data!=data &&aux!=NULL
+//adiciona um contador para contar a quantidade de vezes que o laco passou,assim ira ter a posição
+int indexOf(LinkedList *list, void *data, compare equal){
+	if(isEmpty(list)) return -1;
+	int n=0;
+	Node *aux= list->first;
 
+	while(!equal(aux->data,data) && aux!=NULL){
+		aux=aux->next;
+		n++;
+	}
+	return (aux=NULL)?-1:n; // le-se, se aux for igual a NULL, retona -1 se nao retorna n
+}
+//funcao responsavel por retornar  o endereco do no
+Node *getNodeByPos(LinkedList *list, int pos){
+	int i=0;
+	if(isEmpty(list) || pos>=list->size) return NULL;
+	Node *aux = list->first;
+	while(i<pos-1){//verificar se esta funcionando, prof ta diferente
+		aux= aux->next;
+		i++;
+	}
+	return aux;
+}
