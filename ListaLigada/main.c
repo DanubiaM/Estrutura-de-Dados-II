@@ -15,18 +15,19 @@ int main() {
     *aux=1;
     enqueue(&list, aux);
     aux = (int *)malloc(sizeof(int));
-    *aux=2;
+    *aux=4;
     enqueue(&list, aux);
     aux = (int *)malloc(sizeof(int));
-    *aux=3;
+    *aux=7;
     enqueue(&list, aux);
-    
-    printf("%d\n",*((int*)first(&list)));
-    printf("%d\n",indexOf(&list,aux,compara));
-    printf("%d\n",*((int*)getPos(&list,2)));
-    printf("%d\n",*((int*)dequeue(&list)));
-    printf("%d\n",*((int*)dequeue(&list)));
-    printf("%d\n",*((int*)dequeue(&list)));
+
+    printf("Primeiro item da lista: %d\n",*((int*)first(&list)));
+    printf("Posição do valor: %d é: %d \n", *aux, indexOf(&list,aux,compara));
+    printf("Valor da posição: %d\n",*((int*)getPos(&list,2)));
+    printf("Removendo ... %d\n",*((int*)dequeue(&list)));
+    printf("Removendo ... %d\n",*((int*)dequeue(&list)));
+    printf("Removendo ... %d\n",*((int*)dequeue(&list)));
     //printf("%d\n",*((int*)dequeue(&stack)));
     
     return EXIT_SUCCESS;
+}
