@@ -1,5 +1,6 @@
-//https://codeforwin.org/2015/11/c-program-to-create-and-traverse-circular-linked-list.html
-
+#include <stdio.h>
+#include <stdlib.h>
+#include "LinkedList.h"
 void init(LinkedList *list){
 
   list->first = NULL;
@@ -10,7 +11,7 @@ bool isEmpty(LinkedList *list){
     return (list->size ==0);
 }
 
-
+//funcao responsavel por adicionar no fim da lista
 int enqueue(LinkedList *list, void *data){
 
   Node *newNode= (Node*)malloc(sizeof(Node)); //ira reservar um espaço na memoria do tipo nó para a criação do novo nó
@@ -29,15 +30,16 @@ int enqueue(LinkedList *list, void *data){
      }
   aux->next = newNode;
 }
-
-list->size++;
+  list->size++;
 }
+
+
 void* first(LinkedList *list){
 	Node *aux;
 	if(isEmpty(list)){
 		return NULL;
 	}else{
-		*aux=list->first; //verificar se ta funcionando ,diferente do prof
+		aux=list->first; //verificar se ta funcionando ,diferente do prof
 		return aux->data;
 	}
 }
@@ -62,7 +64,7 @@ void* last(LinkedList *list){
 int push(LinkedList *list, void *data){
 	Node *NewNode = (Node*)malloc(sizeof(Node));
 	NewNode->data= data;
-	if(NewuNode=NULL) return -1;
+	if(NewNode==NULL) return -1;
 
 	if(isEmpty(list)){
 		return list->first = NewNode;
@@ -119,16 +121,19 @@ Node* getNodeByPos(LinkedList *list, int pos){
 	int i=0;
 	if(isEmpty(list) || pos>=list->size) return NULL;
 	Node *aux = list->first;
-	while(i<pos-1){//verificar se esta funcionando, prof ta diferente
+  for (int count=0;aux!=NULL && count<pos;count++){
 		aux= aux->next;
-		i++;
-	}
+  }
+	
 	return aux;
 }
 //funcao resposavel por retornar o dado na posicao especeficada
 void* getPos(LinkedList *list, int pos){
 	Node *aux = getNodeByPos(list,pos);
-	if(aux==NULL)?NULL:aux->data;
+	if(aux==NULL){
+    return NULL;
+  }else{ return aux->data;
+  }
 }
 //funcao responsavel por inserir o dado na posicao solicitada pelo usuario
 int add(LinkedList *list, int pos, void *data){
@@ -136,9 +141,9 @@ int add(LinkedList *list, int pos, void *data){
 	if(isEmpty(list)) return push(list,data);
 
 	Node *aux = getNodeByPos(list,pos-1); //retorna o endereço do nó naquela posicação
-	if(aux=NULL) return -2;
+	if(aux==NULL) return -2;
 	Node *NewNode =  (Node*)malloc(sizeof(Node));
-	if (NewNode=NULL) return -1;
+	if (NewNode==NULL) return -1;
 
 	NewNode->next = aux->next;
 	aux->next= NewNode;
@@ -164,12 +169,13 @@ int addAll(LinkedList *listDest, int pos, LinkedList *listSource){
 	aux->next = listSource->first;
 	}
 	listDest->size +=listSource->size;
-	reuturn listSource->size;
+	return listSource->size;
 }
 //ira remover um elemento da lista, dado a posição
 void* removePos(LinkedList *list, int pos){
-	if(isEmpty(list) || pos>=list->size) return NULL;
-
+	if(isEmpty(list) || pos>=list->size){
+    return NULL;
+  }
 	Node *aux = getNodeByPos(list, pos-1);
 	Node *DeletNode =  aux->next;
 
@@ -181,31 +187,33 @@ void* removePos(LinkedList *list, int pos){
 	list->size--;
 	return DataDelet;
 }
+//funcao responsavel por remover um determinado dado da lista
 bool removeData(LinkedList *list, void *data, compare equal){
-	if(isEmpty(list)) return -1;
-	Node *removeData = NULL;
-	if(equal(list->first->data,data)){
-		removeData= list->first;
-		list->first = list->first->next;
-		free(removeData->data);
-		free(removeData);
-		list->size--;
-		return true;
-	}else{
-		Node *aux=list->first;
-		while(aux->next!=NULL && !equal(aux->next->data,data)){
-			aux=aux->next;
-		}
-		if(aux->next!=NULL){
-			Node *nodeRemove =  aux->next;
-			aux->next= nodeRemove->next;
-			free(remove->data);
-			free(nodeRemove);
-			list->size--;
-			return true;
-		}else{
-			return false;
-		}
+  if (isEmpty(list)) return -1;
+    Node *nodeRemove = NULL;
+    if (equal(list->first->data,data)) {
+        nodeRemove = list->first;
+        list->first = list->first->next;
+        free(nodeRemove->data);
+        free(nodeRemove);
+        list->size--;
+        return true;
+    } else {
+        Node *aux = list->first;
+        while(aux->next!=NULL && !equal(aux->next->data,data))
+            aux=aux->next;
+    
+        if (aux->next!=NULL) {
+            Node *nodeRemove = aux->next;
+            aux->next = nodeRemove->next;
+            free(nodeRemove->data);
+            free(nodeRemove);
+            list->size--;
+            return true;
+        } else {
+            return false;
+        }
+    }
 	}
 //como pensei em fazer
 //int cont=0;
@@ -222,15 +230,4 @@ bool removeData(LinkedList *list, void *data, compare equal){
 //	}
 //}
 //return false;
-}
-//funcao responsavel por retornar a posicao que se contra tal dado
-int indexOf(LinkedList *list, void *data, compare equal){
-	if(isEmpty(list)) return -1;
-	Node *aux =  list->first;
-	int n;
-	while(aux!=NULL && !equal(aux->data,data)){
-		aux=aux->next;
-		n++;
-	}
-	return(aux==NULL)?-1:n;
-}
+
