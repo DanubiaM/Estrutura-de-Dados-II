@@ -22,7 +22,6 @@ typedef struct LinkedList {
 typedef bool (*compare)(void*,void*);
 /* int *n1= (int*)date1;
     int *n2 = (int*)date2;
-
     if(*n1==n*2)?true:false
 */
 //retorna booleado, e tem como parametro dois voids
