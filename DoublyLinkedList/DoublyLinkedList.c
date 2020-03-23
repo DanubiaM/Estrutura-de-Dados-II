@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "DoublyLinkedList.h"
-//Init tem como função iniciar a lista, com um nó lixo, sendo sua função apenas não deixar com que a lista seje nula.
+//Init tem como função iniciar a lista, com um nó lixo, sendo sua função apenas não deixar com que a lista seje nula
 void init(DoublyLinkedList *list){ 
   Node *trashNode = (Node*)malloc(sizeof(Node));
   trashNode->data = NULL;
