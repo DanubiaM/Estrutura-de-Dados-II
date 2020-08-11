@@ -2,22 +2,39 @@
 
 
 int main(){
-  /*  Blockchain blockchain;
+    Blockchain blockchain;
     initBlockchain(&blockchain);
 
     Block *bloco0;
   
     bloco0 = generateNextBlock(&blockchain, 233);
 
-    if(isValidNewBlock(bloco0, blockchain.genesisBlock) == 1 ){
-
-        return addBlock(&blockchain, bloco0);
+    if(isValidNewBlock(bloco0, blockchain.genesisBlock) == true ){
+         
+        printf("Bloco valido \n");
+        if(addBlock(&blockchain, bloco0) == 1){
+           printf("Bloco adicionado \n");
+        } else { 
+           printf("Bloco não adicionado\n");
+        };
 
      }else{ 
+
         return false;
      };
-     */
- 
+   Block *bloco1;
+  
+   bloco1 = generateNextBlock(&blockchain, 43);
+   addBlock(&blockchain, bloco1);
+
+   printf("Blockchain valida? %d \n",isBlockchainValid(&blockchain));
+
+   bloco0->data = 253;
+
+   printf("Blockchain valida? %d \n",isBlockchainValid(&blockchain));
+
+     
+ /*
     Blockchain blockchain;
     
     initBlockchain(&blockchain);
@@ -36,6 +53,6 @@ int main(){
     printf("size: %u\n",blockchain.latestBlock->index);
     return 0;
 
-
+*/
 
 }
